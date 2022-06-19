@@ -1,0 +1,2 @@
+# PyDiscogs
+Discogs api library
