@@ -1,14 +1,20 @@
 from requests_oauthlib import OAuth1Session, OAuth1
+import dotenv
 
 
-CLIENT_KEY = 'uVRZZXYKWHqqPprvFftJ'
-CLIENT_SECRET =	'gqOvioXJkjdowLzDKLMHHQTlcBECEYPF'
 REQUEST_TOKEN_URL = 'https://api.discogs.com/oauth/request_token'
 BASE_AUTHORIZATION_URL = 'https://www.discogs.com/oauth/authorize'
 ACCESS_TOKEN_URL = 'https://api.discogs.com/oauth/access_token'
 
+
+
 class Authorization:
     def __init__(self) -> OAuth1Session:
+        dotenv.load_dotenv()
+        import os
+        CLIENT_KEY = os.environ.get('client-key')
+        CLIENT_SECRET =	os.environ.get('client-secret')
+
         first_oauth = OAuth1Session(client_key=CLIENT_KEY, client_secret=CLIENT_SECRET)
         fetch_response = first_oauth.fetch_request_token(REQUEST_TOKEN_URL)
 
